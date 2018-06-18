@@ -2,9 +2,10 @@
 
 
 // single deck - build an array of 52 cards
-var suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
-var cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-var deck = new Array();
+let suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
+let cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+let deck = new Array();
+let bankroll = 0;
 
 //window onload
 $(() => {
@@ -43,6 +44,9 @@ $(() => {
 			deck[location2] = tempValue;
 		}
 	}
+
+
+//create players (player vs dealer)
 
 
 
