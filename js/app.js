@@ -31,8 +31,18 @@ $(() => {
 // createDeck();
 // console.log(deck);
 
-//creat shuffle function - use fishery yates shuffle
+//creat shuffle function - use fisher yates shuffle
+//Durstenfeld shuffle, a computer-optimized version of Fisher-Yates
+	const shuffle = () => {
+		for (let i = deck.length - 1; i > 0; i--) {
+			let location1 = Math.floor(Math.random() * (i + 1));
+			let location2 = Math.floor(Math.random() * (i + 1));
+			let tempValue = deck[location1];
 
+			deck[location1] = deck[location2];
+			deck[location2] = tempValue;
+		}
+	}
 
 
 
@@ -53,6 +63,8 @@ const startGame = () => {
 		console.log("start works");
 		createDeck();
 		console.log(deck);
+		shuffle(deck)
+		console.log(deck)
 	});
 }
 startGame();
