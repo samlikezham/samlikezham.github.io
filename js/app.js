@@ -4,8 +4,12 @@
 // single deck - build an array of 52 cards
 let suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 let cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-let deck = new Array();
+let deck = [];
 let bankroll = 0;
+let players = [];
+let playerCards = [];
+let dealerCards = [];
+let currentPlayer = 0;
 
 //window onload
 $(() => {
@@ -14,12 +18,11 @@ $(() => {
 
 //function to create deck
     const createDeck = () => {
-        deck = new Array();
-        for (var i = 0 ; i < cards.length; i++)
+        for (let i = 0 ; i < cards.length; i++)
         {
-            for(var x = 0; x < suits.length; x++)
+            for(let x = 0; x < suits.length; x++)
             {	//parse strings into values
-                var weight = parseInt(cards[i]);
+                let weight = parseInt(cards[i]);
                 if (cards[i] == "J" || cards[i] == "Q" || cards[i] == "K")
                     weight = 10;
                 if (cards[i] == "A")
@@ -45,9 +48,41 @@ $(() => {
 		}
 	}
 
+//create players (player vs dealer) / Deal cards
+	const dealCards = () => {
+		//player always gets dealt first, then dealer
+		let firstCard = deck.shift();
+		playerCards.push(firstCard);
+		const $divPlayer = $('<div>');
+			$('#player').append($divPlayer).text(playerCards[0]);
+		//get inner html to display first card we created
 
-//create players (player vs dealer)
 
+		let secondCard = deck.shift();
+		dealerCards.push(secondCard);
+
+		let fourthCard = deck.shift();
+		playerCards.push(fourthCard);
+		//log to check
+		console.log(playerCards)
+
+		let fifthCard = deck.shift();
+		dealerCards.push(fifthCard);
+		//log to check
+		console.log(dealerCards);
+
+	}
+
+
+// const dealerUI = () => {
+// 	const $divDealer = $('<div>');
+// 	const $divDealerHand = $('<div>');
+// 	const $divPoints = $('<div>');
+
+// 	$('#dealer').addClass('dealer').attr('id', 'dealer').append($divDealer);
+// 	$divDealer.attr('id', 'hand ' + i).append($divDealerHand);
+// 	$divDealer.addClass('points').attr('id', 'points').append($divPoints);
+// }
 
 
 //keep track of player/dealer scores
@@ -66,9 +101,9 @@ const startGame = () => {
 	$('.start').on('click', () => {
 		console.log("start works");
 		createDeck();
-		console.log(deck);
-		shuffle(deck)
-		console.log(deck)
+		shuffle(deck);
+		// console.log(deck);
+		dealCards();
 	});
 }
 startGame();
@@ -76,6 +111,7 @@ startGame();
 const hitPlayer =() => {
 	$('.hitMe').on('click', () => {
 		console.log('hit working');
+		// dealCards();
 	})
 }
 hitPlayer();
