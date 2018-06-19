@@ -27,7 +27,12 @@ $(() => {
                     weight = 10;
                 if (cards[i] == "A")
                     weight = 11 || 1;
-                var card = { Value: cards[i], Suit: suits[x], Weight: weight };
+
+                let card = { 
+                	Value: cards[i], 
+                	Suit: suits[x], 
+                	Weight: weight 
+                };
                 deck.push(card);
             }
         }
@@ -54,35 +59,30 @@ $(() => {
 		let firstCard = deck.shift();
 		playerCards.push(firstCard);
 		const $divPlayer = $('<div>');
-			$('#player').append($divPlayer).text(playerCards[0]);
+		// $('#player').append($divPlayer).text(playerCards[0].Value);
 		//get inner html to display first card we created
-
+		// console.log(playerCards[1].Value);
 
 		let secondCard = deck.shift();
 		dealerCards.push(secondCard);
+		const $divDealer = $('<div>');
+		// $('#dealer').append($divDealer).text(dealerCards[0].Value);
 
 		let fourthCard = deck.shift();
 		playerCards.push(fourthCard);
+		$('#player').append($divPlayer).text(playerCards[0].Value + "  " + playerCards[1].Value);
 		//log to check
 		console.log(playerCards)
 
 		let fifthCard = deck.shift();
 		dealerCards.push(fifthCard);
+		$('#dealer').append($divDealer).text(dealerCards[0].Value + "  " + dealerCards[1].Value);
 		//log to check
 		console.log(dealerCards);
 
 	}
 
 
-// const dealerUI = () => {
-// 	const $divDealer = $('<div>');
-// 	const $divDealerHand = $('<div>');
-// 	const $divPoints = $('<div>');
-
-// 	$('#dealer').addClass('dealer').attr('id', 'dealer').append($divDealer);
-// 	$divDealer.attr('id', 'hand ' + i).append($divDealerHand);
-// 	$divDealer.addClass('points').attr('id', 'points').append($divPoints);
-// }
 
 
 //keep track of player/dealer scores
