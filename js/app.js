@@ -26,7 +26,7 @@ $(() => {
                 if (cards[i] == "J" || cards[i] == "Q" || cards[i] == "K")
                     weight = 10;
                 if (cards[i] == "A")
-                    weight = 11 || 1;
+                    weight = 1 || 10;
 
                 let card = { 
                 	Value: cards[i], 
@@ -82,13 +82,26 @@ $(() => {
 
 	}
 
+//got to be able to add more than 1 card to array when hitting
+const hitMe = () => {
+		const $divPlayer = $('<div>');
+		let hitCard = deck.shift();
+		playerCards.push(hitCard);
+		$('#player').append($divPlayer).text(playerCards[0].Value + "  " + playerCards[1].Value + " " + playerCards[2].Value);
+		checkWin();
+}
 
 
+const checkWin = () => {
+	if (playerCards[0].Weight + playerCards[1].Weight + playerCards[2].Weight > 21) {
+		console.log("lost")
+	}
+}
 
-//keep track of player/dealer scores
 
-//function hit should take a random card from array and add X value to player
-//and dealer scores
+//create function to update/keep track of player/dealer scores
+
+//create function to check for win/loss
 
 
 //function stay
@@ -111,7 +124,7 @@ startGame();
 const hitPlayer =() => {
 	$('.hitMe').on('click', () => {
 		console.log('hit working');
-		// dealCards();
+		hitMe();
 	})
 }
 hitPlayer();
