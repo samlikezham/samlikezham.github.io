@@ -1,102 +1,127 @@
-// console.log("it works")
+
+let cards = [];
+let playerCard = [];
+let dealerCard = [];
+let cardCount = 0; //keeps track of what card we're at in the deck
+let myMoney = 100;
+let endGame = false;
+let suits = ["spades", "hearts", "clubs", "diams"]; //named diams for output
+let numb = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q","K"];
+let output = document.getElementById("output");
+let message = document.getElementById("message");
+let dealerHolder = document.getElementById("dealerHolder");
+let playerHolder = document.getElementById("playerHolder");
+let playerValue = document.getElementById("playerValue");
+let dealerValue = document.getElementById("dealerValue");
+let moneyValue = document.getElementById("money")
 
 
-// single deck - build an array of 52 cards
-let suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
-let cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-let deck = [];
-let bankroll = 0;
-let players = [];
-let playerCards = [];
-let dealerCards = [];
-let currentPlayer = 0;
-
-//window onload
-$(() => {
-
-
-
-//function to create deck
-    const createDeck = () => {
-        for (let i = 0 ; i < cards.length; i++)
-        {
-            for(let x = 0; x < suits.length; x++)
-            {	//parse strings into values
-                let weight = parseInt(cards[i]);
-                if (cards[i] == "J" || cards[i] == "Q" || cards[i] == "K")
-                    weight = 10;
-                if (cards[i] == "A")
-                    weight = 1 || 10;
-
-                let card = { 
-                	Value: cards[i], 
-                	Suit: suits[x], 
-                	Weight: weight 
-                };
-                deck.push(card);
-            }
-        }
-    }
-// createDeck();
-// console.log(deck);
-
-//creat shuffle function - use fisher yates shuffle
-//Durstenfeld shuffle, a computer-optimized version of Fisher-Yates
-	const shuffle = () => {
-		for (let i = deck.length - 1; i > 0; i--) {
-			let location1 = Math.floor(Math.random() * (i + 1));
-			let location2 = Math.floor(Math.random() * (i + 1));
-			let tempValue = deck[location1];
-
-			deck[location1] = deck[location2];
-			deck[location2] = tempValue;
+	//logs all items in array with s
+for (s in suits) {
+	//within the suit value first index of s will be uppercase
+	let suit = suits[s][0].toUpperCase();
+	let bgColor = (suit == "S" || suit == "C") ? "black" : "red";
+				//if Suit = Spades or Clubs, then apply Black, if not red
+	//logs all items in array with n
+	for (n in numb) {
+		//grab output and place += for cards to show consecutively
+		//insert span tags and style
+		
+		// output.innerHTML += "<span style='color:"+bgColor+"'>&" + suits[s] + ";" + numb[n] + "</span> ";
+		
+		//if N is greater than 9 then assign value of 10
+		//parse string from n array and turn into integer
+		let cardValue = (n > 9) ? 10 : parseInt(n) + 1;
+		let card = {
+			suit:suit,
+			icon:suits[s],
+			bgColor:bgColor,
+			cardNum:numb[n],
+			cardValue:cardValue
 		}
+		//push value of card into array
+		cards.push(card);
 	}
+}
 
-//create players (player vs dealer) / Deal cards
-	const dealCards = () => {
-		//player always gets dealt first, then dealer
-		let firstCard = deck.shift();
-		playerCards.push(firstCard);
-		const $divPlayer = $('<div>');
-		// $('#player').append($divPlayer).text(playerCards[0].Value);
-		//get inner html to display first card we created
-		// console.log(playerCards[1].Value);
+// console.log(cards);
 
-		let secondCard = deck.shift();
-		dealerCards.push(secondCard);
-		const $divDealer = $('<div>');
-		// $('#dealer').append($divDealer).text(dealerCards[0].Value);
+//to shuffle the deck
+//once start game, then give option to deal
+const start = () => {
+	shuffleDeck(cards);
+	dealNew();
+	//hide start btn once its clicked
+	document.getElementById('start').style.display = "none";
+	//get money and set it equal to the defined variable
+	document.getElementById('money').innerHTML = myMoney;
+	//after we shuffle the deck deal out new cards
+	// dealNew();
+	//test output - after shuffling deck 
+}
 
-		let fourthCard = deck.shift();
-		playerCards.push(fourthCard);
-		$('#player').append($divPlayer).text(playerCards[0].Value + "  " + playerCards[1].Value);
-		//log to check
-		console.log(playerCards)
+const dealNew = () => {
+	//clear out playerCard and dealerCard array so we know
+	//when dealing out we are clearing everything outright
+	playerCard = [];
+	dealerCard = [];
+	dealerHolder.innerHTML = "";
+	playerHolder.innerHTML = "";
+	dealerValue.innerHTML = "";
 
-		let fifthCard = deck.shift();
-		dealerCards.push(fifthCard);
-		$('#dealer').append($divDealer).text(dealerCards[0].Value + "  " + dealerCards[1].Value);
-		//log to check
-		console.log(dealerCards);
 
+	//show stay hit and deal btns
+	//get bet value and store it. Get sum of myMoney
+	let betValue = document.getElementById('myBet').value;
+	myMoney = myMoney - betValue
+	document.getElementById('money').innerHTML = myMoney;
+	document.getElementById('actions').style.display = 'block';
+	document.getElementById('myBet').disabled = true;
+	deal();
+
+}
+
+//deal cards function
+const deal = () => {
+	console.log(cards);
+// card count reshuffle
+	for (x = 0; x < 2; x++) {
+		dealerCard.push(cards[cardCount]);
+		dealerHolder.innerHTML += cardOutput(cardCount, x);
+		//if first card dealt out, then cover up dealer card
+		if ( x == 0) {
+			dealerHolder.innerHTML += '<div id="cover" style="left:100px;"></div>';
+		}
+		cardCount++
+		playerCard.push(cards[cardCount]);
+		playerHolder.innerHTML += cardOutput(cardCount, x);
+		cardCount++
 	}
+	// let playerCardSum = checkSum(playerCard);
+	// playerValue.innerHTML = playerCardSum;
+		//better to do this
+	playerValue.innerHTML = checkSum(playerCard);
+	console.log(dealerCard);
+	console.log(playerCard);
+}
+
+//have to pass in a value of n and x for what the card is
+//then position card using CSS
+const cardOutput = (n, x) => {
+	let hpos = (x > 0) ? x * 60 + 100 : 100;
+	return '<div class="icard ' + cards[n].icon + '" style="left:' + hpos + 'px;"> <div class="top-card suit">' + cards[n].cardNum + '<br></div> <div class="content-card suit"></div><div class="bottom-card suit">' + cards[n].cardNum + '<br></div> </div>';
+}
 
 //got to be able to add more than 1 card to array when hitting
 const hitMe = () => {
+	for (x = 0; x < 2; x+)
 		const $divPlayer = $('<div>');
 		let hitCard = deck.shift();
 		playerCards.push(hitCard);
 		$('#player').append($divPlayer).text(playerCards[0].Value + "  " + playerCards[1].Value + " " + playerCards[2].Value);
-		checkWin();
+		//check for win or bust here
 }
 
-
-const checkWin = () => {
-	if (playerCards[0].Weight + playerCards[1].Weight + playerCards[2].Weight > 21) {
-		console.log("lost")
-	}
-}
 
 
 //create function to update/keep track of player/dealer scores
@@ -110,33 +135,31 @@ const checkWin = () => {
 
 
 //event listeners
-const startGame = () => {
-	$('.start').on('click', () => {
-		console.log("start works");
-		createDeck();
-		shuffle(deck);
-		// console.log(deck);
-		dealCards();
-	});
-}
-startGame();
+// const startGame = () => {
+// 	$('.start').on('click', () => {
+// 		console.log("start works");
+// 		createDeck();
+// 		shuffle(deck);
+// 		// console.log(deck);
+// 		dealCards();
+// 	});
+// }
+// startGame();
 
-const hitPlayer =() => {
-	$('.hitMe').on('click', () => {
-		console.log('hit working');
-		hitMe();
-	})
-}
-hitPlayer();
+// const hitPlayer =() => {
+// 	$('.hitMe').on('click', () => {
+// 		console.log('hit working');
+// 		hitMe();
+// 	})
+// }
+// hitPlayer();
 
-const stayPlayer = () => {
-	$('.stay').on('click', () => {
-		console.log('stay works');
-	})
-}
-stayPlayer();
-
+// const stayPlayer = () => {
+// 	$('.stay').on('click', () => {
+// 		console.log('stay works');
+// 	})
+// }
 
 
-});
+
 
