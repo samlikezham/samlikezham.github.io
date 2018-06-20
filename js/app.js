@@ -122,7 +122,16 @@ const hitMe = () => {
 		//check for win or bust here
 }
 
-
+//fisher yates shuffle method
+const shuffleDeck = (array) => {
+	for (let i = array.length -1; i > 0; i--) {
+		let j = Math.floor(Math.random() * (i + 1));
+		let temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+	return array;
+}
 
 //create function to update/keep track of player/dealer scores
 
