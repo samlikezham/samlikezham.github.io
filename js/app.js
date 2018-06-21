@@ -1,6 +1,4 @@
 
-
-//clear out previous messages if player wins/loses/pushes
 //add double down button
 //fix blackjack payout
 
@@ -74,6 +72,8 @@ const dealNew = () => {
 	dealerHolder.innerHTML = "";
 	playerHolder.innerHTML = "";
 	dealerValue.innerHTML = "";
+	//clean out message once deal button is clicked
+	clean();
 
 
 	//show stay hit and deal btns
