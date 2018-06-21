@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Blackjack Game</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel:400,700" rel="stylesheet">
 </head>
 <body>
 
@@ -12,9 +12,6 @@
 		<div>
 			<h1>21 BlackJack</h1>
 
-			<div id="start">
-			<button id="btnstart" type="button" onclick="start()" class="btn">Start Game</button>
-			</div>
 
 			<div class="bankroll"><strong>Bankroll:</strong> $<span id="money">100</span>
 		
@@ -44,6 +41,10 @@
 				</div>
 				<div>
 				<button id="dealBtn" type="button" onclick="dealNew()" class="btn">Deal</button>
+				</div>
+
+				<div id="start">
+				<button id="btnstart" type="button" onclick="start()" class="btn">Start Game</button>
 				</div>
 			</div>
 

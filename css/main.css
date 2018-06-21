@@ -1,11 +1,12 @@
 body {
 	background-color: green;
-	padding-left: 300px;
 	font-family: cinzel;
+	text-align: center;
 }
 
 #output {
 	font-size: 18px;
+	padding-top: 15px;
 }
 
 #cover {

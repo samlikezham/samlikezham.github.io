@@ -83,6 +83,7 @@ const dealNew = () => {
 	document.getElementById('money').innerHTML = myMoney;
 	document.getElementById('actions').style.display = 'block';
 	document.getElementById('myBet').disabled = true;
+	document.getElementById('dealBtn').style.display = 'none';
 	deal();
 
 }
@@ -201,7 +202,7 @@ const endHand = () => {
 
 		 if ((playerTotal < 22 && playerTotal > dealerCardSum) || 
 			(dealerCardSum > 21 && playerTotal < 22)) {
-			message.innerHTML += '<span style="color:green"> Player wins $' + betValue + '</span>';
+			message.innerHTML += '<span style="color:black"> Player wins $' + betValue + '</span>';
 		//multiply by 2 bc we take value off the total so if we dont do this
 		//user will always break even
 			myMoney = myMoney + (betValue * 2);
@@ -211,7 +212,7 @@ const endHand = () => {
 		} else if (playerTotal < dealerCardSum) {
 			message.innerHTML += '<span style="color:red"> Dealer wins. Player lost $' + betValue + '</span>';
 		} else if (playerTotal == dealerCardSum) {
-			message.innerHTML += '<span style="color:blue"> Push </span>';
+			message.innerHTML += '<span style="color:black"> Push </span>';
 			//give player money back without multiplying by 2
 			myMoney = myMoney + betValue;
 		} 
