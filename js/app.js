@@ -97,7 +97,7 @@ const deal = () => {
 		dealerHolder.innerHTML += cardOutput(cardCount, x);
 		//if first card dealt out, then cover up dealer card
 		if ( x == 0) {
-			dealerHolder.innerHTML += '<div id="cover" style="left:400px;"></div>';
+			dealerHolder.innerHTML += '<div id="cover" style="left:450px;"></div>';
 		}
 		cardCount++
 		playerCard.push(cards[cardCount]);
@@ -187,6 +187,10 @@ const endHand = () => {
 		cardCount++;
 		dealerCardSum = checkSum(dealerCard);
 		dealerValue.innerHTML = dealerCardSum;
+		//dealer should not hit if player has 21 upon dealing
+		if (playerTotal == 21 && playerCard.length == 2 && dealerCard.length == 2) {
+			endHand();
+		}
 	}
 
 	//check for win

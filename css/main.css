@@ -4,7 +4,7 @@ body {
 	text-align: center;
 }
 h1 {
-	font-size: 50px;
+	font-size: 55px;
 }
 
 #output {
@@ -50,7 +50,7 @@ h1 {
 
 
 .icard {
-	margin-left: 300px;
+	margin-left: 350px;
 	height: 160px;
 	width: 120px;
 	padding: 3px;
@@ -64,10 +64,9 @@ h1 {
 }
 
 .top-card {
+	margin-right: 100px;
 	font-size: 20px;
 	line-height: 20px;
-	left: 2px;
-	top: 2px;
 }
 
 .content-card {
@@ -76,10 +75,9 @@ h1 {
 }
 
 .bottom-card {
+	margin-left: 100px;
 	font-size: 20px;
 	line-height: 20px;
-	right: 2px;
-	bottom: 2px;
 	transform: rotate(-180deg);
 }
 
