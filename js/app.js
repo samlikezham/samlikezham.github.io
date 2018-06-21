@@ -1,6 +1,9 @@
 
-//fix ACE adjust
+
 //clear out previous messages if player wins/loses/pushes
+//add double down button
+//fix blackjack payout
+
 
 let cards = [];
 let playerCard = [];
@@ -162,6 +165,8 @@ const hitCard = () => {
 
 //function to end the current hand
 const endHand = () => {
+	//prevent messages from stacking
+	clean();
 
 	endGame = true;
 	//hide and show correct btns
@@ -172,7 +177,7 @@ const endHand = () => {
 	document.getElementById('myBet').disabled = false;
 	// message.innerHTML = "Game Over:";
 
-	let blackjackPayout = 1;
+	// let blackjackPayout = 1;
 	let dealerCardSum = checkSum(dealerCard);
 	dealerValue.innerHTML = dealerCardSum;
 
@@ -191,9 +196,9 @@ const endHand = () => {
 	let playerTotal = checkSum(playerCard);
 		if(playerTotal == 21 && playerCard.length == 2) {
 			message.innerHTML = "Player Has Blackjack!";
-			blackjackPayout = 1.5;
+			// blackjackPayout = 1.5;
 	}
-	let betValue = parseInt(document.getElementById('myBet').value) * blackjackPayout;
+	let betValue = parseInt(document.getElementById('myBet').value);
 	// let betValue = parseInt(document.getElementById('myBet').value);
 
 		 if ((playerTotal < 22 && playerTotal > dealerCardSum) || 
@@ -234,6 +239,12 @@ const checkSum = (array) => {
 		playerCardSum = playerCardSum - 10;
 	}
 	return playerCardSum;
+}
+
+
+//clean out messages before delivering new
+const clean = () => {
+	document.getElementById('message').innerHTML='';
 }
 
 
