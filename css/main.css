@@ -1,4 +1,8 @@
-
+body {
+	background-color: green;
+	padding-left: 300px;
+	font-family: cinzel;
+}
 
 #output {
 	font-size: 18px;
@@ -23,6 +27,11 @@
 	width: 500px;
 }
 
+.container {
+	display: flex;
+}
+
+
 .messageDisplay {
 	text-align: center;
 }
@@ -35,6 +44,8 @@
 	color: black;
 	font-size: 15px;
 }
+
+
 
 .icard {
 	height: 160px;
@@ -92,7 +103,6 @@
 .clubs .suit::after {
 	content: '\2663';
 }
-
 
 
 

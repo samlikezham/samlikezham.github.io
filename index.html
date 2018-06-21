@@ -4,10 +4,11 @@
 	<meta charset="utf-8">
 	<title>Blackjack Game</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 </head>
 <body>
 
-	<div>
+	<div class="container">
 		<div>
 			<h1>21 BlackJack</h1>
 
@@ -15,11 +16,12 @@
 			<button id="btnstart" type="button" onclick="start()" class="btn">Start Game</button>
 			</div>
 
-			<div class="bankroll">Bankroll $<span id="money">100</span>
-			</div>
-			<!-- bet input and deal/max bet button -->
-			<div>Bet Amount $<input type="number" id="myBet" value="5" min="1" max="100">
-			</div>			
+			<div class="bankroll"><strong>Bankroll:</strong> $<span id="money">100</span>
+		
+				<!-- bet input and deal/max bet button -->
+				<div><strong>Bet Amount</strong> $<input type="number" id="myBet" value="5" min="1" max="100">
+				</div>
+			</div>		
 		</div>
 
 		<div class="messageDisplay"><span id="message"></span></div>

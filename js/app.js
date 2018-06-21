@@ -165,8 +165,6 @@ const hitCard = () => {
 
 //function to end the current hand
 const endHand = () => {
-	//prevent messages from stacking
-	clean();
 
 	endGame = true;
 	//hide and show correct btns
