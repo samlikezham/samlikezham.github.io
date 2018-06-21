@@ -1,4 +1,4 @@
-
+//if its a push money should come back to player
 let cards = [];
 let playerCard = [];
 let dealerCard = [];
@@ -14,6 +14,18 @@ let playerHolder = document.getElementById("playerHolder");
 let playerValue = document.getElementById("playerValue");
 let dealerValue = document.getElementById("dealerValue");
 let moneyValue = document.getElementById("money");
+
+document.getElementById('myBet').onchange = function () => {
+	console.log("test");
+	// if (this.value < 0) {
+	// 	this.value = 0;
+	// } 
+	// if (this.value > myMoney) {
+	// 	this.value = myMoney;
+	// }
+	// message.innerHTML = "Not enough funds. Bet changed to $" + this.value;
+}
+
 
 
 	//logs all items in array with s
@@ -182,13 +194,14 @@ const endHand = () => {
 	}
 
 	//check for win
-	//account for blackjack (x 1.5)auto win upon first hand deal
+	//account for blackjack (x 1.5) win upon first hand deal
 	let playerTotal = checkSum(playerCard);
 		if(playerTotal == 21 && playerCard.length == 2) {
 			message.innerHTML = "Player Has Blackjack!";
 			blackjackPayout = 1.5;
 	}
 	let betValue = parseInt(document.getElementById('myBet').value) * blackjackPayout;
+	// let betValue = parseInt(document.getElementById('myBet').value);
 
 		 if ((playerTotal < 22 && playerTotal > dealerCardSum) || 
 			(dealerCardSum > 21 && playerTotal < 22)) {
@@ -202,10 +215,10 @@ const endHand = () => {
 		} else if (playerTotal < dealerCardSum) {
 			message.innerHTML += '<span style="color:red"> Dealer wins. Player lost $' + betValue + '</span>';
 		} else if (playerTotal == dealerCardSum) {
-			message.innerHTML += '<span style="color:blue"> Push</span>';
+			message.innerHTML += '<span style="color:blue"> Push </span>';
 			//give player money back without multiplying by 2
 			myMoney = myMoney + betValue;
-		}
+		} 
 		// playerValue.innerHTML = dealerValue;
 		moneyValue.innerHTML = myMoney;
 }
