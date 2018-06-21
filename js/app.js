@@ -13,16 +13,16 @@ let dealerHolder = document.getElementById("dealerHolder");
 let playerHolder = document.getElementById("playerHolder");
 let playerValue = document.getElementById("playerValue");
 let dealerValue = document.getElementById("dealerValue");
-let moneyValue = document.getElementById("money")
+let moneyValue = document.getElementById("money");
 
 
-
+	//logs all items in array with s
 for (s in suits) {
 	//within the suit value first index of s will be uppercase
 	let suit = suits[s][0].toUpperCase();
 	let bgColor = (suit == "S" || suit == "C") ? "black" : "red";
 				//if Suit = Spades or Clubs, then apply Black, if not red
-
+	//logs all items in array with n
 	for (n in numb) {
 		//grab output and place += for cards to show consecutively
 		//insert span tags and style
@@ -112,15 +112,6 @@ const cardOutput = (n, x) => {
 	return '<div class="icard ' + cards[n].icon + '" style="left:' + hpos + 'px;"> <div class="top-card suit">' + cards[n].cardNum + '<br></div> <div class="content-card suit"></div><div class="bottom-card suit">' + cards[n].cardNum + '<br></div> </div>';
 }
 
-//got to be able to add more than 1 card to array when hitting
-const hitMe = () => {
-	for (x = 0; x < 2; x+)
-		const $divPlayer = $('<div>');
-		let hitCard = deck.shift();
-		playerCards.push(hitCard);
-		$('#player').append($divPlayer).text(playerCards[0].Value + "  " + playerCards[1].Value + " " + playerCards[2].Value);
-		//check for win or bust here
-}
 
 //fisher yates shuffle method
 const shuffleDeck = (array) => {
@@ -133,42 +124,111 @@ const shuffleDeck = (array) => {
 	return array;
 }
 
-//create function to update/keep track of player/dealer scores
+const outputCard = () => {
+	//+= will allow us to add cards consecutively to our id of output 
+	output.innerHTML += "<span style='color:" + cards[cardCount].bgColor + "'>" + 
+	cards[cardCount].cardNum + "&" + cards[cardCount].icon + ";</span>  ";
+}
 
-//create function to check for win/loss
+//functions for button events
+const cardAction = (event) => {
+	console.log(event);
+	switch (event) {
+		case 'hit':
+			hitCard();
+			break;
+		case 'stay':
+			endHand();
+	}
+}
 
+//hit function
+const hitCard = () => {
+	playerCard.push(cards[cardCount]);
+	playerHolder.innerHTML += cardOutput(cardCount, (playerCard.length -1));
+	cardCount++
 
-//function stay
-//function checkWin
-//function checkLoss
+	let playerCardSum = checkSum(playerCard);
+	playerValue.innerHTML = playerCardSum;
+	if (playerCardSum > 21) {
+		message.innerHTML = "bust!";
+		endHand();
+	}
+}
 
+///function to end the current hand
+const endHand = () => {
+	endGame = true;
+	//hide and show correct btns
+	document.getElementById('cover').style.display = "none";
+	document.getElementById('actions').style.display = "none";
+	document.getElementById('dealBtn').style.display = "block";
+	//show deal button only when game is over
+	document.getElementById('myBet').disabled = false;
+	// message.innerHTML = "Game Over:";
 
-//event listeners
-// const startGame = () => {
-// 	$('.start').on('click', () => {
-// 		console.log("start works");
-// 		createDeck();
-// 		shuffle(deck);
-// 		// console.log(deck);
-// 		dealCards();
-// 	});
-// }
-// startGame();
+	let blackjackPayout = 1;
+	let dealerCardSum = checkSum(dealerCard);
+	dealerValue.innerHTML = dealerCardSum;
 
-// const hitPlayer =() => {
-// 	$('.hitMe').on('click', () => {
-// 		console.log('hit working');
-// 		hitMe();
-// 	})
-// }
-// hitPlayer();
+	//DEALER AI
+	//if dealer hand is less than 17 then automatically add cards
+	while (dealerCardSum < 17) {
+		dealerCard.push(cards[cardCount]);
+		dealerHolder.innerHTML += cardOutput(cardCount, (dealerCard.length -1));
+		cardCount++;
+		dealerCardSum = checkSum(dealerCard);
+		dealerValue.innerHTML = dealerCardSum;
+	}
 
-// const stayPlayer = () => {
-// 	$('.stay').on('click', () => {
-// 		console.log('stay works');
-// 	})
-// }
+	//check for win
+	//account for blackjack (x 1.5)auto win upon first hand deal
+	let playerTotal = checkSum(playerCard);
+		if(playerTotal == 21 && playerCard.length == 2) {
+			message.innerHTML = "Player Has Blackjack!";
+			blackjackPayout = 1.5;
+	}
+	let betValue = parseInt(document.getElementById('myBet').value) * blackjackPayout;
 
+		 if ((playerTotal < 22 && playerTotal > dealerCardSum) || 
+			(dealerCardSum > 21 && playerTotal < 22)) {
+			message.innerHTML += '<span style="color:green"> Player wins $' + betValue + '</span>';
+		//multiply by 2 bc we take value off the total so if we dont do this
+		//user will always break even
+			myMoney = myMoney + (betValue * 2);
+	
+		} else if (playerTotal > 21) {
+			message.innerHTML += '<span style="color:red"> Dealer wins. Player lost $' + betValue + '</span>';
+		} else if (playerTotal < dealerCardSum) {
+			message.innerHTML += '<span style="color:red"> Dealer wins. Player lost $' + betValue + '</span>';
+		} else if (playerTotal == dealerCardSum) {
+			message.innerHTML += '<span style="color:blue"> Push</span>';
+			//give player money back without multiplying by 2
+			myMoney = myMoney + betValue;
+		}
+		// playerValue.innerHTML = dealerValue;
+		moneyValue.innerHTML = myMoney;
+}
+
+//check sum of cards and account for Ace 11 or 1
+const checkSum = (array) => {
+	let playerCardSum = 0;
+	let aceAdjust = false;
+	for (let i in array) {
+		//if card is an Ace AND aceAdjust = false (by default)
+		if (array[i].cardNum == 'A' && !aceAdjust) {
+			aceAdjust = true;
+			//get sum of 11
+			playerCardSum = playerCardSum + 10;
+		}
+		playerCardSum = playerCardSum + array[i].cardValue;
+	}	//then while aceAdjust is true AND playerCard > 21
+		//then subtract 10 to turn it back to 1
+	if (aceAdjust && playerCardSum > 21) {
+		playerCardSum = playerCardSum - 10;
+	}
+	return playerCardSum;
+}
 
 
 
