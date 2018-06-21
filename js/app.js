@@ -1,4 +1,5 @@
 
+//player bust stops hit
 //add double down button
 //fix blackjack payout
 
@@ -188,9 +189,9 @@ const endHand = () => {
 		dealerCardSum = checkSum(dealerCard);
 		dealerValue.innerHTML = dealerCardSum;
 		//dealer should not hit if player has 21 upon dealing
-		if (playerTotal == 21 && playerCard.length == 2 && dealerCard.length == 2) {
-			endHand();
-		}
+		// if (playerTotal == 21 && playerCard.length == 2 && dealerCard.length == 2) {
+			
+		// }
 	}
 
 	//check for win
