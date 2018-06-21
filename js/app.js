@@ -18,7 +18,7 @@ let moneyValue = document.getElementById("money");
 
 
 
-	//logs all items in array with s
+
 for (s in suits) {
 	//within the suit value first index of s will be uppercase
 	let suit = suits[s][0].toUpperCase();
