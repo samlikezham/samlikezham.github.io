@@ -156,7 +156,7 @@ const hitCard = () => {
 	}
 }
 
-///function to end the current hand
+//function to end the current hand
 const endHand = () => {
 	endGame = true;
 	//hide and show correct btns
@@ -229,6 +229,8 @@ const checkSum = (array) => {
 	}
 	return playerCardSum;
 }
+
+
 
 
 
