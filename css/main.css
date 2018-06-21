@@ -1,7 +1,10 @@
 body {
-	background-color: green;
+	background: #52b152;
 	font-family: cinzel;
 	text-align: center;
+}
+h1 {
+	font-size: 50px;
 }
 
 #output {
@@ -28,13 +31,11 @@ body {
 	width: 500px;
 }
 
-.container {
-	display: flex;
-}
 
 
 .messageDisplay {
 	text-align: center;
+	padding-top: 20px;
 }
 
 .btn {
@@ -49,6 +50,7 @@ body {
 
 
 .icard {
+	margin-left: 300px;
 	height: 160px;
 	width: 120px;
 	padding: 3px;

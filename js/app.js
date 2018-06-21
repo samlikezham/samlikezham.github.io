@@ -97,7 +97,7 @@ const deal = () => {
 		dealerHolder.innerHTML += cardOutput(cardCount, x);
 		//if first card dealt out, then cover up dealer card
 		if ( x == 0) {
-			dealerHolder.innerHTML += '<div id="cover" style="left:100px;"></div>';
+			dealerHolder.innerHTML += '<div id="cover" style="left:400px;"></div>';
 		}
 		cardCount++
 		playerCard.push(cards[cardCount]);
@@ -118,7 +118,6 @@ const cardOutput = (n, x) => {
 	let hpos = (x > 0) ? x * 60 + 100 : 100;
 	return '<div class="icard ' + cards[n].icon + '" style="left:' + hpos + 'px;"> <div class="top-card suit">' + cards[n].cardNum + '<br></div> <div class="content-card suit"></div><div class="bottom-card suit">' + cards[n].cardNum + '<br></div> </div>';
 }
-
 
 //fisher yates shuffle method
 const shuffleDeck = (array) => {
