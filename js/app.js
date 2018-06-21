@@ -18,20 +18,6 @@ let moneyValue = document.getElementById("money");
 
 
 
-//onchange function 
-document.getElementById('myBet').onchange = function () {
-	console.log("test");
-	if (this.value < 0) {
-		this.value = 0;
-	} 
-	if (this.value > myMoney) {
-		this.value = myMoney;
-	}
-	message.innerHTML = "Bet changed to $" + this.value;
-}
-
-
-
 	//logs all items in array with s
 for (s in suits) {
 	//within the suit value first index of s will be uppercase
@@ -156,6 +142,7 @@ const cardAction = (event) => {
 		case 'stay':
 			endHand();
 	}
+	finishedGame();
 }
 
 //hit function
@@ -248,6 +235,27 @@ const checkSum = (array) => {
 }
 
 
+//end of game - hide buttons and change message once player loses bankroll
+const finishedGame = () => {
+	if (myMoney <= 0) {
+		message.innerHTML = "Player has no money. Game is now over.";
+		document.getElementById('dealBtn').style.display = "none";
+	}
+}
 
+
+//onchange function to keep bet amount within bankroll amount
+document.getElementById('myBet').onchange = function () {
+	console.log("test");
+	//prevent player from betting below 0
+	if (this.value < 0) {
+		this.value = 0;
+	} 
+	//prevent player from betting money they don't have
+	if (this.value > myMoney) {
+		this.value = myMoney;
+	}
+	message.innerHTML = "Bet changed to $" + this.value;
+}
 
 
