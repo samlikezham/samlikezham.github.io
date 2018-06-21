@@ -6,6 +6,7 @@ Player vs dealer blackjack game. Get to 21 or beat the dealer's hand to win. Pla
 
 Created using HTML/CSS/JS.
 For loops used to create deck and deal cards out to dealer vs player.
+Fisher yates shuffle implemented to simulate a live shuffle.  
 Card icons created and designed by CSS.
 
 https://samlikezham.github.io/
