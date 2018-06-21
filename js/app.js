@@ -1,4 +1,7 @@
-//if its a push money should come back to player
+
+//fix ACE adjust
+//clear out previous messages if player wins/loses/pushes
+
 let cards = [];
 let playerCard = [];
 let dealerCard = [];
@@ -16,15 +19,13 @@ let dealerValue = document.getElementById("dealerValue");
 let moneyValue = document.getElementById("money");
 
 
-
-
-
+	//loop through all values in suits
 for (s in suits) {
 	//within the suit value first index of s will be uppercase
 	let suit = suits[s][0].toUpperCase();
 	let bgColor = (suit == "S" || suit == "C") ? "black" : "red";
 				//if Suit = Spades or Clubs, then apply Black, if not red
-	//logs all items in array with n
+	//loop through al values in numb
 	for (n in numb) {
 		//grab output and place += for cards to show consecutively
 		//insert span tags and style
@@ -161,6 +162,7 @@ const hitCard = () => {
 
 //function to end the current hand
 const endHand = () => {
+
 	endGame = true;
 	//hide and show correct btns
 	document.getElementById('cover').style.display = "none";
