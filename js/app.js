@@ -113,13 +113,6 @@ const deal = () => {
 	console.log(playerCard);
 }
 
-//have to pass in a value of n and x for what the card is
-//then position card using CSS
-const cardOutput = (n, x) => {
-	let hpos = (x > 0) ? x * 60 + 100 : 100;
-	return '<div class="icard ' + cards[n].icon + '" style="left:' + hpos + 'px;"> <div class="top-card suit">' + cards[n].cardNum + '<br></div> <div class="content-card suit"></div><div class="bottom-card suit">' + cards[n].cardNum + '<br></div> </div>';
-}
-
 //fisher yates shuffle method
 const shuffleDeck = (array) => {
 	for (let i = array.length -1; i > 0; i--) {
@@ -129,6 +122,13 @@ const shuffleDeck = (array) => {
 		array[j] = temp;
 	}
 	return array;
+}
+
+//have to pass in a value of n and x for what the card is
+//then position card using CSS
+const cardOutput = (n, x) => {
+	let hpos = (x > 0) ? x * 60 + 100 : 100;
+	return '<div class="icard ' + cards[n].icon + '" style="left:' + hpos + 'px;"> <div class="top-card suit">' + cards[n].cardNum + '<br></div> <div class="content-card suit"></div><div class="bottom-card suit">' + cards[n].cardNum + '<br></div> </div>';
 }
 
 const outputCard = () => {
@@ -147,7 +147,6 @@ const cardAction = (event) => {
 		case 'stay':
 			endHand();
 	}
-	finishedGame();
 }
 
 //hit function
@@ -166,6 +165,7 @@ const hitCard = () => {
 
 //function to end the current hand
 const endHand = () => {
+	clean();
 
 	endGame = true;
 	//hide and show correct btns
@@ -253,7 +253,7 @@ const clean = () => {
 
 //end of game - hide buttons and change message once player loses bankroll
 const finishedGame = () => {
-	if (myMoney <= 0) {
+	if (myMoney === 0) {
 		message.innerHTML = "Player has no money. Game is now over.";
 		document.getElementById('dealBtn').style.display = "none";
 	}
