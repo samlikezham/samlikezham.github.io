@@ -15,15 +15,19 @@ let playerValue = document.getElementById("playerValue");
 let dealerValue = document.getElementById("dealerValue");
 let moneyValue = document.getElementById("money");
 
-document.getElementById('myBet').onchange = function () => {
+
+
+
+//onchange function 
+document.getElementById('myBet').onchange = function () {
 	console.log("test");
-	// if (this.value < 0) {
-	// 	this.value = 0;
-	// } 
-	// if (this.value > myMoney) {
-	// 	this.value = myMoney;
-	// }
-	// message.innerHTML = "Not enough funds. Bet changed to $" + this.value;
+	if (this.value < 0) {
+		this.value = 0;
+	} 
+	if (this.value > myMoney) {
+		this.value = myMoney;
+	}
+	message.innerHTML = "Bet changed to $" + this.value;
 }
 
 
