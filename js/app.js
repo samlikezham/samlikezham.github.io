@@ -132,7 +132,7 @@ const cardOutput = (n, x) => {
 }
 
 const outputCard = () => {
-	//+= will allow us to add cards consecutively to our id of output 
+	//add cards consecutively to our id of output 
 	output.innerHTML += "<span style='color:" + cards[cardCount].bgColor + "'>" + 
 	cards[cardCount].cardNum + "&" + cards[cardCount].icon + ";</span>  ";
 }
@@ -222,6 +222,7 @@ const endHand = () => {
 		} 
 		// playerValue.innerHTML = dealerValue;
 		moneyValue.innerHTML = myMoney;
+		finishedGame();
 }
 
 //check sum of cards and account for Ace 11 or 1
